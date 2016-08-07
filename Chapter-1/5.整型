@@ -1,0 +1,139 @@
+整型
+  任何一个数字常量（例如：30、100）那么都属于int类型的数据类型。
+  即在Java之中所有设置的整数内容在默认情况下都是int型
+
+
+例：
+   public class Demo {
+	public static void main(String args[]){
+         //为变量设置内容使用如下格式；
+		 //数据类型 变量类型 = 常量 ；
+		 int num = 10 ;  //10是常量，常量的默认类型是 int
+		 int result = num * 2 ;//利用num变量的内容乘以2，并且将赋值给result
+         System.out.println(result) ;
+	}
+}
+
+定义完变量之后可以实现对变量的的四则运算。
+实际上变量与常量最大的区别只有一个；常量是固定的，变量是会改变的。
+
+ 例
+   public class Demo {
+	public static void main(String args[]){
+         //为变量设置内容使用如下格式；
+		 //数据类型 变量类型 = 常量 ；
+		 int num = 10 ;  //10是常量，常量的默认类型是 int
+		 num = num * 2 ;//取出num变量的内容乘以，并且将其设置给num变量
+		 //所有的变量在同一块代码之中只允许声明一次。
+         System.out.println(num) ;
+	}
+}
+
+每一种数据类型都有其对应数据类型的保存范围，那么下面来观察一个程序。
+   范例：如果超过了int的最大值或最小值的结果。
+   public class Demo {
+	   public static void main(String args[]){
+	      int max = Integer.MAX_VALUE ; //取出最大值
+		  int min = Integer.MIN_VALUE ; //取出最小值
+		  System.out.println(max);
+		  System.out.println(min);
+	   }
+   }
+
+
+--------------------------------------------------------------------------------------
+
+
+   public class Demo {
+   public static void main(String args[]){
+	      int max = Integer.MAX_VALUE ;    //取出最大值
+		  int min = Integer.MIN_VALUE ;    //取出最小值
+		  System.out.println(max) ;
+		  System.out.println(min) ;
+		  //int变量 ± int型常量 =int数据
+		  System.out.println(max + 1) ;  //最大值+1:-2147483648
+          System.out.println(min - 1);  //最小值-1：2147483647
+		  System.out.println(min - 2);  //最小值-2：2147483646
+ 	   }
+   }
+
+现在就感觉整个代码变为了一种循环的形式，最大值如果继续增加就变成了最小值，随后一直向最小值一直循环，反之最小值-1变为最大值。
+因为任何的数据的计算都是按二进制进行的，第一位是符号，其他31位都是数据位。
+     此种现象称为数据的溢出，想解决这种问题则要选择比int范围更大的是long数据类型。
+
+范例：扩大数据类型：
+       在程序的世界，数据类型的转换有以下规律
+	      ·数据范围小的和数据范围大的数据进行数学计算的时候，自动向大的数据转换
+		  ·数据范围大的数据要变为数据范围小的数据，那么必须采用强制转换；
+		  ·如果是常量进行强制转换，有两种是：常量编辑（L、l）、使用（数据类型）。
+  
+   public class Demo {
+   public static void main(String args[]){
+	      int max = Integer.MAX_VALUE ;    //取出最大值
+		  int min = Integer.MIN_VALUE ;    //取出最小值
+		  System.out.println(max) ;
+		  System.out.println(min) ;
+		  //int变量 ± int型常量 =int数据
+		  System.out.println(max + 1L) ;  //最大值+1:-2147483648
+          System.out.println(min - (long)1); 
+		  System.out.println((long)min - 2);  
+ 	   }
+   }
+
+//现在为止计算结果是正确的，所以要想成功地解决数据溢出，一定要使用更大范围的数据类型
+//只要你写的代码属于正常可以使用的代码，基本上数据溢出的情况很少见。除了做习题很少出现。
+//以上的代码是利用了数据的转型解决了数据的操作错误，但是对于程序而言，除了小变大数据类型之外，也可以将范围大的变小，那么必须用“（数据类型）”来改变
+
+public class Demo{
+	public static void main(String args[]){
+		long num =1000 ; // 1000常量是int型，使用long接受，发生了向大范围转型的操作
+		int x = (int)num ; //把long变为int,确定了大的数据类型在小的范围里面，可以使用“（数据类型）”来强制转换
+		System.out.println(x);
+	}
+}
+
+如果将long变为int时候索索保存的数据超过了int的范围，那么依然会出现数据溢出的问题。
+
+面试题 1和l 这里考验的是专注力。
+
+
+--------------------------------------------------------------------------------------------------
+在整形数据之中，byte型数据是一个非常有用的数据类型，对于byte型数据取值范围：/*-128-127*/之间。
+public class Demo {
+	public static void main(String args[]){
+		int num = 130 ;//此范围超过了byte范围定义
+		byte x = num ; //由int变为byte
+		System.out.println(x) ;
+	}
+}
+
+
+但是由于byte使用的特殊性，java对其有了一些很好的改善。
+public class Demo {
+	public static void main(String args[]){
+		byte num =100 ;  //虽然任何一个整数都属于int型，但是JAVA编译的时候，如果发现使用的数据变量类型为byte，并且设置的内容没在byte数据范围之内
+		System.out.println(num);//那么就会自动帮用户实现数据类型的转换。
+	}
+}
+
+※所有的变量在使用的时候一定不要去相信默认值，都设置具体内容。
+   
+   如果在方法里面定义的默认值是不起任何作用的
+public class Demo {
+	public static void main(String args[]){
+		int num;  //没有默认值
+		num = 0;  //在使用此变量之前设置内容
+		System.out.println(num);
+	}
+}
+
+//以上操作形式是属于先定义了一个变量num，但是此变量没有设置内容，而后设置了num变量的内容最后再使用此变量，可是以上代码在jdk1.4及以前的版本是
+//不可能编译通过的。最标准的做法是定义变量的时候先定义好默认值。编写代码之前先给0、空值、ture、flase的默认值。
+public class Demo {
+	public static void main(String args[]){
+		int num = 0 ;  //先设置好默认值
+		System.out.println(num);
+	}
+}
+
+正常使用，90%都去考虑使用int型数据。
