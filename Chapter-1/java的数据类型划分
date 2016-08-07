@@ -1,0 +1,86 @@
+知识点：
+1.Java中各个数据类型的定义
+2.Java各种数据类型的使用
+3.第一次观察String类型的使用
+
+
+
+
+※具体内容(重点)
+     任何的程序严格来讲都属于一个数据的处理游戏。所以对数据的保存就必须要有严格的限制。
+	 那么这些限制就体现在了数据类型的划分上，即：不同的数据类型可以保存不同的数据内容。
+     
+	            ※基本数据类型：
+	                   数值型：
+		                 整形：byte、short、int、long；   →默认值：0
+		                 浮点型：float、double；          →默认值：0.0
+		               字符型：char；                     →默认值：'\u0000'
+		               布尔型：bollean；                  →默认值：false
+	            引用数据类型：数组、类、接口；         →默认值：null
+
+      基本数据类型不牵扯到内存分配问题，而引用数据类型需要开发者为其分配空间，而后进行关系匹配。
+      基本数据类型分为八种、引用数据类型分为三种。这么多数据类型怎么选择？
+
+※个人选择数据类型原则（99.9999%都通用）：
+     ·    ·表示整数就使用 int，表示小数就使用 double，
+          ·如果要描述日期时间数字或者文件（或内存）大小使用long；
+		  ·如果要实现内容传递或者是编码转换使用byte
+		  ·如果要实现逻辑控制，使用bollean描述。
+          ·如果要想中文，使用char可以避免乱码问题
+如果按保存范围：byte<int<long<double
+
+
+     数据可用范围：
+	               数据类型  大小                          范围  
+		byte       (字节)     8                        -128 - 127 0
+        shot       (短整型)   16                     -32768 - 32768 0
+		int        (整型)     32                -2147483648 - 2147483648 0
+        long       (长整型)   64       -9233372036854477808 - 9233372036854477808 0 
+        float      (浮点型)   32            -3.40292347E+38 - 3.40292347E+38 0.0f
+        double     (双精度)	  64  -1.79769313486231570E+308 - 1.79769313486231570E+308 0.0d
+        char       (字符型)   16               ‘ \u0000 - u\ffff ’ ‘\u0000 ’
+        boolean    (布尔型)   1                     true/false false
+
+
+
+ 浮点数：在java之中只要是小数，那么对应的数据类型就是double型数据（double是保存范围最广的数据类型）。
+
+范例：
+ public class Testdemo{
+	 public static void main(String args[]){
+		 double num = 10.2; //10.2是小数所以属于double型
+		 //doubel型 * int型（转化为double 2.0）=double型
+		 System.out.println(num * 2);
+	 }
+ }            //但是这个会出错运行不了
+
+由于默认的小数类型就是double，如果使用了float表示需要将double型变为float型，需要强制转换。
+范例：
+public class Twstdemo {
+	publick static void main(String args[]){
+		float f1 =10.2F ;
+		float f2 =（float）10.2；
+		System.out.println(f1 * f2);
+    }
+}
+但是发现最终的结果显示输出104.03999（这个后面的9还算少的），这个问题是JDK1.0的时候存在bug，只能够通过后期处理完成。
+额外提示：实际上最靠开发的时候，考虑到内存的问题，往往能使用float就不适用double，例如：J2ME开发由于内存苛刻，往往会
+          压缩数据范围，以节约空间。现在随着硬件成本的降低，发咯爱他还是double数据区别不大，那么就直接试用double数据。
+          需要注意的是，所有的数据类型只有double才可以保存小数
+          public class Testdemo {
+	          public static void main(String args[]){
+                  int x = 9 ;
+                  int y = 5 ;
+                  System.out.println(x / y) ;
+              }
+           }
+        //上面这个可以发现，如果进行了除法计算发现最终变味了1，因为所有的小数位被忽略。此时要得出正确结果，则可以将其中一个整型变为浮点型。
+          public class Testdemo {
+	          public static void main(String args[]){
+                  int x = 9 ;
+                  int y = 5 ;
+                  System.out.println(x / (doubel)y) ;//这里加入了个（double）变成了浮点型，最后结果也会变成浮点型能显示小数
+              }
+           }
+
+		   ※在以后的开发之中，一定要考虑到整形不保留小数位的问题
