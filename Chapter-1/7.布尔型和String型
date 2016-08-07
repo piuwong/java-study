@@ -1,0 +1,82 @@
+布尔型
+   布尔是一个数学家的名字，布尔型是一种逻辑结果，主要保存两类数据：true、flase。这类数据主要用于一些程序的逻辑使用上。
+ 范例：
+public class Demo {
+	public static void main(String args[]){
+		boolean flag = true ;
+		if (flag){//if (布尔值) {满足条件的操作}
+			System.out.println("Hello motherfuck!");
+		}
+	}
+}
+
+if (!flag) 里面带感叹号就是取反的过程
+
+java里面不允许使用0或1代表false和true
+
+
+String型数据
+  只要是项目开发，100%会使用String。但是与其他的几种基本数据类型相比，相比String属于引用数据类型（它属于一个类，在Java里面只要是类名称，
+  每一个单词首字母都是大写），但是这个类的使用比较特殊。
+
+  String表示的是一个字符串，即：多个字符的集合，String要求使用“"”声明其内容
+
+范例：观察String操作
+
+public class Demo {
+	public static void main(String args[]){
+		//数据类型 变量 = "内容"；现在叫变量，日后学习了才叫对象
+		String str = "Hello World!" ;//字符串变量
+		System.out.println(str);
+		System.out.println("Hello World!"); //字符串常量
+	}	    
+}
+
+在String操作里面，也可以使用“+”进行字符串的连接操作。
+
+范例：字符串连接
+
+public class Demo {
+	public static void main(String args[]){
+		String str = "Hello" ;
+		str = str + " World" ;//连接
+		str += "!!!"; //连接 上下两种连接写法一样
+		System.out.println(str); 
+	}	    
+}
+//数学计算里面有“+”号，字符串连接里面也有“+“号。
+
+public class Demo {
+	public static void main(String args[]){
+		int numA = 100 ;
+		double numB = 99.9 ;
+		String str = "加法计算：" + (numA + numB) ;
+		System.out.println(str); 
+	}	    
+}
+
+从之前讲解的基本数据类型来说，任何的数据类型都向范围大的数据类型即N型转换，像int遇见double应线変位double，而后进行加法计算，但是如果遇见了String，
+那么一切都变了。如果遇见了+，那么所有的数据类型斗仙变成了String类型数据，而后再执行此时结果是错误的，此时只有通过“()”来改变计算结果。
+//限制性括号内的加法计算，而后再将结果与字符串进行连接
+
+在Java里面也支持多种转移字符的使用，例如：换行(\n)、制表符（\t）、（\\）、双引号（\"）、单引号（\'）
+
+范例：转移字符
+public class Demo {
+	public static void main(String args[]){
+		String str ="Hello \"World\"!!!\n\tHello Piu!!!" ;
+		System.out.println(str) ;
+	}
+}
+//这些转移字符在Java的学习过程之中考虑到格式经常会出现。
+
+
+
+※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※
+
+※总结
+ 1、一定要熟练各个常用的数据类型：整数用int、小数用double、逻辑boolean；
+ 2、long、byte、char在处理数据的是时候会使用到；
+ 3、数据类型的转换永远都是小范围自动向大范围转换，大转小要考虑到强制转换
+ 4、int和char之间的互相转换是以编码为主，大小写字母差了32个
+ 5、String是特殊类，用于描述字符串，字符串使用“"”声明，使用”+“号连接。
