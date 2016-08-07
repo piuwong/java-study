@@ -1,0 +1,43 @@
+字符型 char
+   byte属于字节，按传统的概念来讲，一个字符=两个字节，对于字符除了与字节有一些有一些关系之外，最主要关系在于与int型变量的转换。
+   java使用16进制unicode编码，设计之初考虑与（C/C++）结合，那么在此编码里包含了ACSII码的部分编码。字符型用 '' 单引号表示。
+
+范例：定义字符
+public class Demo {
+	public static void main(String args[]){
+		char c = 'A'; //字符
+		//字符可以和int相互转换（以编码的形式出现）
+		int num = c;
+		System.out.println(c);
+		System.out.println(num);
+	}
+
+}
+
+             经过测试发现一些编码情况：·'A'(65)~'Z'(90) ; ·'a'(97)~'z'(122)；'0'（48）~'9'（57）；
+       其中”A“的编码值要小于”a“的编码值32，那么可以利用简单的数学计算来实现大小写转换。
+
+
+
+public class Demo {
+	public static void main(String args[]){
+		char c = 'A'; //是大写字母
+		int num = c ;//需要将字符变为int型才可以变为小写字母
+		num = num +32 ; //变为小写字母的编码
+		c = (char)num ; //将int变为char型，char只能和int相互转换
+		System.out.print( c );
+	}
+}
+
+传统的编程语言之中，字符里面只能够保存一些英文字母的标记，但是在java之中，
+由于使用了unicode编码，这种十六进制的编码可以保存任意的文字，可以设置一个中文字符
+ 
+public class Demo {
+	public static void main(String args[]){
+		char c = '黄'; //是中文字
+		int num = c;
+		System.out.print( num );
+	}
+}
+正因为现在的中文保存的方便，所以在断句的时候很好用。
+只有在处理中文的时候，字符数据才有那么一点点帮助，其他的情况下，几乎用不到字符数据。但是要知道char字符数据可以和int相互转换
